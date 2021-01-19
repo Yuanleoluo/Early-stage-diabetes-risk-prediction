@@ -17,7 +17,7 @@
 
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict')}}"method="post">
-    	<input type="text" name="experience" placeholder="Sex" required="required" />
+    	<input type="text" name="experience" placeholder="male/female" required="required" />
         <input type="text" name="test_score" placeholder="Polyuria" required="required" />
 		<input type="text" name="interview_score" placeholder="Polydipsia " required="required" />
 		<input type="text" name="interview_score" placeholder="sudden weight loss" required="required" />
