@@ -9,18 +9,37 @@ model = pickle.load(open('diabetesPredictionModel.pkl', 'rb'))
 def home():
     return render_template('index.html')
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict',methods=['POST'])
 def predict():
     '''
     For rendering results on HTML GUI
     '''
-    int_features = [int(x) for x in request.form.values()]
-    final_features = [np.array(int_features)]
+    features = [str(x) for x in request.form.values()]
+
+    for i in range(len(features)):
+      if features[i] == 'Yes':
+        features[i] = 1
+      elif features[i] == 'Female':
+        features[i] = 1
+      elif features[i] == 'No':
+        features[i] = 0
+      elif features[i] == 'Male':
+        features[i] = 0
+      else:
+      	features[i] = int(features[i])
+
+
+    final_features = [np.array(features)]
     prediction = model.predict(final_features)
 
-    output = round(prediction[0], 2)
 
-    return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
+    if prediction[0] == 1:
+      output = "You are at high risk of devloping diabete"
+    else:
+      output = "You are at low risk of devloping diabete"
+
+    
+    return render_template('index.html', prediction_text='{}'.format(output))
 
 
 if __name__ == "__main__":
