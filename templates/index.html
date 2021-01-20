@@ -5,37 +5,209 @@
   <meta charset="UTF-8">
   <title>Predict Diabetes API</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-  
+
+  <style>
+	.radio-toolbar input[type="radio"] {
+	  opacity: 0;
+	  position: fixed;
+	  width: 0;
+	}
+
+
+	.radio-toolbar input[type="radio"]:checked + label {
+    	 background-color: #bfb;
+    	 border-color: #4c4;
+	}
+  </style>
+
 </head>
 
 <body>
- <div class="login">
-	<h1>Predict Diabetes Analysis</h1>
-
+ <div class="login" class="container-fluid">
+ 	<div class="jumbotron row justify-content-md-center">
+		<h1>Predict Diabetes Analysis</h1>
+	</div>
      <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">
-    	<input type="text" name="experience" placeholder="male/female" required="required" />
-        <input type="text" name="test_score" placeholder="Polyuria" required="required" />
-		<input type="text" name="interview_score" placeholder="Polydipsia " required="required" />
-		<input type="text" name="interview_score" placeholder="sudden weight loss" required="required" />
-		<input type="text" name="interview_score" placeholder="weakness" required="required" />
-		<input type="text" name="interview_score" placeholder="Polydipsia " required="required" />
-		<input type="text" name="interview_score" placeholder="Polydipsia " required="required" />
-		<input type="text" name="interview_score" placeholder="Polydipsia " required="required" />
-		<input type="text" name="interview_score" placeholder="Polydipsia " required="required" />
-		<input type="text" name="interview_score" placeholder="Polydipsia " required="required" />
-		<input type="text" name="interview_score" placeholder="Polydipsia " required="required" />
+    <form action="{{ url_for('predict')}}" method="post">
+      <div class="radio-toolbar">
+    	<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Age: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="text" name="Age" placeholder="Age" required="required">
+			</div>
+    	</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Sex: 
+    		</div>
+    		<div class="col col-lg-2" data-toggle="buttons">
 
-        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    		  <input type="radio" class="btn-check" value="Male" name="Sex" id="Male" autocomplete="off" required="required"/>
+  			  <label class="btn btn-outline-primary" for="Male">Male</label>
+
+  			  <input type="radio" class="btn-check" value="Female" name="Sex" id="Female" autocomplete="off" />
+  			  <label class="btn btn-outline-primary" for="Female">Female</label>
+
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Polyuria: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Polyuria" id="Yes" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Polyuria" id="No" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Polydipsia: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Polydipsia" id="Yes-p" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-p">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Polydipsia" id="No-p" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-p">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Sudden weight loss: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Sudden-weight-loss" id="Yes-s" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-s">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Sudden-weight-loss" id="No-s" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-s">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Weakness: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Weakness" id="Yes-w" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-w">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Weakness" id="No-w" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-w">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Polyphagia: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Polyphagia" id="Yes-po" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-po">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Polyphagia" id="No-po" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-po">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Genital thrush: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Genital thrush" id="Yes-gt" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-gt">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Genital thrush" id="No-gt" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-gt">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Visual blurring: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Visual blurring" id="Yes-vb" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-vb">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Visual blurring" id="No-vb" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-vb">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Irritability: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Irritability" id="Yes-ir" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-ir">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Irritability" id="No-ir" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-ir">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Partial Paresis: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Partial Paresis" id="Yes-pp" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-pp">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Partial Paresis" id="No-pp" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-pp">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Muscle stifness: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Muscle stifness" id="Yes-mt" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-mt">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Muscle stifness" id="No-mt" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-mt">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Alopecia: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Alopecia" id="Yes-a" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-a">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Alopecia" id="No-a" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-a">No</label>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+      					Obesity: 
+    		</div>
+    		<div class="col col-lg-2">
+				<input type="radio" class="btn-check" value="Yes" name="Obesity" id="Yes-o" autocomplete="off" required="required">
+				<label class="btn btn-outline-primary" for="Yes-o">Yes</label>
+
+				<input type="radio" class="btn-check" value="No" name="Obesity" id="No-o" autocomplete="off">
+				<label class="btn btn-outline-primary" for="No-o">No</label>
+			</div>
+		</div>
+	  </div>
+
+		<div class="row justify-content-md-center">
+        	<button type="submit" class="btn btn-info">Predict</button>
+        </div>
     </form>
 
    <br>
    <br>
-   {{ prediction_text }}
+   <div class="row justify-content-md-center p-3 mb-2 bg-light text-black">
+   		{{ prediction_text }}
+   </div>
 
  </div>
 
